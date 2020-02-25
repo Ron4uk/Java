@@ -9,6 +9,7 @@ package forGit.Java;
 
 public class Zorg2 {
     private  String name;
+    private  String name2;
     public static void main(String[] args) {
         int[] massif = {13, 3, 8, 1, 15, 2, 3, 7, 4};
         System.out.print("Массив до сортировки: ");
