@@ -8,9 +8,8 @@ package forGit.Java;
 
 
 public class Solution {
- 
-    public static void main(String[] args)  {
 
+    public static void main(String[] args)  {
         int[] array = {13, 3, 8, 1, 15, 2, 3, 7, 4};
         System.out.print("Массив до сортировки: ");
         for (int i = 0; i < array.length; i++)
@@ -97,5 +96,3 @@ public class Solution {
     }
 
     }
-
-
