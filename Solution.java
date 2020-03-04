@@ -9,44 +9,67 @@ package forGit.Java;
 
 public class Solution {
  
-    public static void main(String[] args) {
-        int[] massif = {13, 3, 8, 1, 15, 2, 3, 7, 4};
+    public static void main(String[] args)  {
+        int[] array = {13, 3, 8, 1, 15, 2, 3, 7, 4};
         System.out.print("Массив до сортировки: ");
-        for (int i = 0; i < massif.length; i++)
-            System.out.print(massif[i] + " ");
+        for (int i = 0; i < array.length; i++)
+            System.out.print(array[i] + " ");
         System.out.println("");
-        massif = sortArray(massif);
+        array = sortByIndex(array, 0, array.length);   //указываем индексы, с какого по какой необходимо сделать сортировку
         System.out.print("Массив после сортировки: ");
-        for (int i = 0; i < massif.length; i++)
-            System.out.print(massif[i] + " ");
+        for (int i = 0; i < array.length; i++)
+            System.out.print(array[i] + " ");
     }
 
-
-    public static int[] sortArray(int[] arrayA) { // сортировка Массива который передается в функцию
-        // проверяем не нулевой ли он?
-        if (arrayA == null) {
-            return null;
+    public static int[] sortByIndex(int[] array, int start, int end) {
+        int[] newArray;
+        int count =start;
+        if(start<end&& end<=array.length) {
+            newArray = new int[end-start];
+            for(int i=0; i<newArray.length;i++){
+                newArray[i]=array[count];
+                count++;
+            }
+            count = start;
+            newArray=sort(newArray);
+         for(int i=0; i<newArray.length; i++){
+            array[count]=newArray[i];
+            count++;
+            }
+            return array;
         }
-        // проверяем не 1 ли элемент в массиве?
-        if (arrayA.length < 2) {
-            return arrayA; // возврат в рекурсию в строки ниже см комменты.
+        else {System.out.println("Incorrect index for sort");
+        return array;
         }
-        // копируем левую часть от начала до середины
-        int[] arrayB = new int[arrayA.length / 2];
-        System.arraycopy(arrayA, 0, arrayB, 0, arrayA.length / 2);
 
-        // копируем правую часть от середины до конца массива, вычитаем из длины первую часть
-        int[] arrayC = new int[arrayA.length - arrayA.length / 2];
-        System.arraycopy(arrayA, arrayA.length / 2, arrayC, 0, arrayA.length - arrayA.length / 2);
+    }
 
-        // рекурсией закидываем поделенные обе части обратно в наш метод, он будет крутится до тех пор,
-        // пока не дойдет до 1 элемента в массиве, после чего вернется в строку и будет искать второй такой же,
-        // точнее правую часть от него и опять вернет его назад
-        arrayB = sortArray(arrayB); // левая часть возврат из рекурсии строкой return arrayA;
-        arrayC = sortArray(arrayC); // правая часть возврат из рекурсии строкой return arrayA;
+    public static int[] sort(int[] array)  { // сортировка Массива который передается в функцию
 
-        // далее опять рекурсия возврата слияния двух отсортированных массивов
-        return mergeArray(arrayB, arrayC);
+
+            if (array == null) {
+                return null;
+            }
+
+            if (array.length < 2) {
+                return array;
+            }
+            // копируем левую часть от начала до середины
+            int[] arrayB = new int[array.length / 2];
+            System.arraycopy(array, 0, arrayB, 0, array.length / 2);
+
+            // копируем правую часть от середины до конца массива, вычитаем из длины первую часть
+            int[] arrayC = new int[array.length - array.length / 2];
+            System.arraycopy(array, array.length / 2, arrayC, 0, array.length - array.length / 2);
+
+
+            arrayB = sort(arrayB); //   через рекурсию добиваемся 1 элемента в массиве, а даллее раскричаемся в обратную сторону
+            arrayC = sort(arrayC); //   и через mergeArray объединяем получившиеся массивы
+
+
+            return mergeArray(arrayB, arrayC);
+
+
     }
 
     public static int[] mergeArray(int[] arrayА, int[] arrayB) {
@@ -71,5 +94,7 @@ public class Solution {
         }
         return arrayC;
     }
-}
+
+    }
+
 
